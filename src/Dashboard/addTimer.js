@@ -3,11 +3,11 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
 // create a component
-class addd extends Component {
+class addTimer extends Component {
     render() {
         return (
-            <View style={styles.container}>
-                <Text>addd</Text>
+            <View style={{flex:1}}>
+                <Text>addTimer</Text>
             </View>
         );
     }
@@ -15,13 +15,8 @@ class addd extends Component {
 
 // define your styles
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#2c3e50',
-    },
+   
 });
 
 //make this component available to the app
-export default addd;
+export default addTimer;
