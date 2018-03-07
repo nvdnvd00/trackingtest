@@ -114,7 +114,7 @@ class AddComponent extends Component {
                             marginLeft: 0,
                             padding: 10,
                             borderColor: 'grey',
-                            borderWidth: 1,
+                            borderWidth: 0.5,
                             borderTopRightRadius: 30,
                             borderBottomRightRadius: 30,
 
@@ -123,7 +123,7 @@ class AddComponent extends Component {
                         options={['red', 'blue', 'green', 'yellow']}
                         dropdownStyle={{ height: undefined, width: 100 }}
                         dropdownTextStyle={{ fontSize: 18, color: 'black' }}
-                        defaultValue='red'
+                        
                         onSelect={(idx, value) => {
                             this.setState({ colorChoose: value });
 
@@ -141,7 +141,14 @@ class AddComponent extends Component {
 
                 }}
                     onPress={() => {
-                        if (!this.state.newTimerName.trim()) { Alert.alert('Error', 'Please enter Timer name!'); return; }
+                        if (!this.state.newTimerName.trim()) { 
+                            Alert.alert('Error', 'Please enter Timer name!'); 
+                            return; 
+                        }
+                        if (!this.state.colorChoose.trim()) { 
+                            Alert.alert('Error', 'Please choose Timer color!'); 
+                            return; 
+                        }
 
                         this.props.onClickAdd(this.state.newTimerName, this.state.newTimerDescription, this.state.colorChoose);
                         this.props.navigation.dispatch(resetAction);

@@ -12,7 +12,7 @@ class AddTimer extends Component {
                 justifyContent: 'flex-start',
                 alignItems: 'center',
                 height: 60,
-                borderBottomWidth: 1,
+                borderBottomWidth: 0.5,
                 borderBottomColor: 'grey'
             }}>
                 <TouchableOpacity style={{ flex: 1, flexDirection: 'row' }}

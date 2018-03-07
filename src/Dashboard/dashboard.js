@@ -35,6 +35,15 @@ class HeaderTitle extends Component {
 
 // create a component
 class Dashboard extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            refreshing: false,
+        };
+    }
+    onRefresh() {
+        this.setState({ refreshing: true }, function () { });
+    }
 
     static navigationOptions = {
         headerTitle: <HeaderTitle />,
@@ -42,42 +51,60 @@ class Dashboard extends Component {
     render() {
         return (
             <View style={{ flex: 1 }}>
-                <View style={{ height: 100, backgroundColor: 'red' }} >
+                <View style={{ height: 100, backgroundColor: 'grey' }} >
 
                 </View>
                 <ScrollView style={{ flex: 1, }}>
                     <FlatList
                         style={{ height: undefined }}
+                        onRefresh={() => this.onRefresh()}
+                        refreshing={this.state.refreshing}
                         data={this.props.timer}
                         renderItem={({ item }) => {
                             return (
                                 <View style={{
-                                    height: 60,
-                                    borderBottomWidth: 1,
+                                    flexDirection: 'row',
+                                    borderBottomWidth: 0.5,
                                     borderBottomColor: 'grey',
-                                    justifyContent:'center',
                                 }}>
-                                    <Text style={
-                                        {
-                                            fontSize: 16,
-                                            paddingLeft: 5,
-                                            color: this.props.color
-                                        }
-                                    }>
-                                        {item.timerName}
-                                    </Text>
+                                    <View style={{
+                                        margin: 10,
+                                        height: 60,
+                                        width: 60,
+                                        backgroundColor: item.color,
+                                        borderRadius: 7
+                                    }}>
+                                    //count total time here
+                                    </View>
+                                    <View>
+                                        <View style={{
+                                            height: 60,
 
-                                    <Text style={
-                                        {
-                                            fontSize: 16,
-                                            fontWeight: 'bold',
-                                            paddingLeft: 5,
-                                            color: this.props.color
-                                        }
-                                    }>
-                                        {item.timerDescription}
-                                    </Text>
+                                            justifyContent: 'center',
+                                        }}>
+                                            <Text style={
+                                                {
+                                                    fontSize: 16,
+                                                    paddingLeft: 5,
+                                                    color: this.props.color
+                                                }
+                                            }>
+                                                {item.timerName}
+                                            </Text>
 
+                                            <Text style={
+                                                {
+                                                    fontSize: 16,
+                                                    fontWeight: 'bold',
+                                                    paddingLeft: 5,
+                                                    color: this.props.color
+                                                }
+                                            }>
+                                                {item.timerDescription}
+                                            </Text>
+
+                                        </View>
+                                    </View>
                                 </View>
                             );
                         }}
