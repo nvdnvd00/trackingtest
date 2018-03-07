@@ -120,9 +120,9 @@ class AddComponent extends Component {
 
 
                         }}
-                        options={['red', 'blue', 'green', 'yellow']}
+                        options={['antiquewhite', 'aqua', 'aquamarine','azure','blueviolet','floralwhite','forestgreen']}
                         dropdownStyle={{ height: undefined, width: 100 }}
-                        dropdownTextStyle={{ fontSize: 18, color: 'black' }}
+                        dropdownTextStyle={{ fontSize: 14, color: 'black' }}
                         
                         onSelect={(idx, value) => {
                             this.setState({ colorChoose: value });

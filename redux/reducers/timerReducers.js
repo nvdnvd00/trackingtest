@@ -1,4 +1,7 @@
-import {ADD_NEW_TIMER} from '../actions/actionsTypes';
+import {
+    ADD_NEW_TIMER,
+    TOGGLE_TIMER
+} from '../actions/actionsTypes';
 
 const timerReducers= (timer =[],action)=>{
     switch (action.type) {
@@ -14,7 +17,14 @@ const timerReducers= (timer =[],action)=>{
                     color: action.timerColor,
                 }
             ]
-            
+        case TOGGLE_TIMER:
+            return timer.map(timer=>
+                (timer.timerId === action.timerId)?{
+                    ...timer,
+                    onDoing: !timer.onDoing,
+                }:timer
+
+            )
     
         default:
             return timer;
