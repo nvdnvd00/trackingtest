@@ -4,7 +4,7 @@ import { View, Text, StyleSheet, Image, FlatList, ScrollView, TouchableOpacity }
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { connect } from 'react-redux';
 import AddTimer from './addTimer';
-import {toggleTimer} from '../../redux/actions';
+import { toggleTimer } from '../../redux/actions';
 import moment from 'moment';
 import 'moment/locale/vi';
 var currentDate = moment().locale("vi").format("dddd, Do MMMM ");
@@ -33,7 +33,6 @@ class HeaderTitle extends Component {
         );
     }
 }
-
 
 // create a component
 class Dashboard extends Component {
@@ -76,9 +75,9 @@ class Dashboard extends Component {
                                         width: 60,
                                         backgroundColor: item.color,
                                         borderRadius: 7,
-                                        justifyContent:'center'
+                                        justifyContent: 'center'
                                     }}>
-                                        <Text style={{alignSelf:'center'}}>00:00</Text>
+                                        <Text style={{ alignSelf: 'center' }}>00:00</Text>
                                     </View>
                                     <View>
                                         <View style={{
@@ -112,19 +111,37 @@ class Dashboard extends Component {
                                             }
                                         </View>
                                     </View>
-                                    <View style={{ flex: 1, justifyContent: 'center',alignItems:'flex-end' }}>
-                                        <TouchableOpacity style={{maxWidth:150}} 
-                                        onPress={()=>{this.props.onClickToggle(item.timerId)}}>
+                                    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'flex-end' }}>
+                                        <TouchableOpacity style={{ maxWidth: 150 }}
+                                            onPress={() => { this.props.onClickToggle(item.timerId) }}>
 
-                                            {item.onDoing===false? <Icon style={{ 
-                                                right: 5, 
-                                                alignSelf: 'flex-end' 
-                                            }} name="access-time" size={50} color='grey' />
-                                            :<Icon style={{ 
-                                                right: 5, 
-                                                alignSelf: 'flex-end' 
-                                                }} name="access-time" size={50} color={item.color} />}
-                                            
+                                            {
+                                                item.onDoing === false ? <Icon style={{
+                                                    right: 5,
+                                                    alignSelf: 'flex-end'
+                                                }} name="access-time" size={50} color='grey' />
+                                                    : <View style={{ flexDirection: 'row' }}>
+                                                        <View style={{
+                                                            justifyContent: 'center'
+                                                        }}>
+                                                            <View style={{
+                                                                backgroundColor: item.color,
+                                                                height: 30,
+                                                                width: 55,
+                                                                
+                                                                justifyContent: 'center'
+                                                            }}>
+                                                                <Text style={{ alignSelf: 'center' }}>00:00</Text>
+                                                            </View>
+                                                        </View>
+                                                        <Icon style={{
+                                                            right: 5,
+                                                            alignSelf: 'flex-end'
+                                                        }} name="access-time" size={50} color={item.color} />
+
+                                                    </View>
+                                            }
+
                                         </TouchableOpacity>
                                     </View>
                                 </View>
@@ -153,10 +170,10 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch) {
     return {
-        onClickToggle: (timerId) =>{
+        onClickToggle: (timerId) => {
             dispatch(toggleTimer(timerId));
         }
     }
 }
 //make this component available to the app
-export default connect(mapStateToProps,mapDispatchToProps)(Dashboard);
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

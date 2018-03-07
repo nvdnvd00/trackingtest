@@ -19,10 +19,14 @@ const timerReducers= (timer =[],action)=>{
             ]
         case TOGGLE_TIMER:
             return timer.map(timer=>
+                
                 (timer.timerId === action.timerId)?{
                     ...timer,
                     onDoing: !timer.onDoing,
-                }:timer
+                }:{
+                    ...timer,
+                    onDoing: false,
+                }
 
             )
     
