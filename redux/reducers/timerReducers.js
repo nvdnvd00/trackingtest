@@ -8,8 +8,10 @@ const timerReducers= (timer =[],action)=>{
                 {
                     timerId: action.timerId,
                     timerName: action.timerName,
+                    timerDescription: action.timerDescription,
                     onDoing: action.onDoing,
                     totalTime: action.totalTime,
+                    color: action.timerColor,
                 }
             ]
             
