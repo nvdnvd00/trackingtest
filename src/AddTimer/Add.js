@@ -120,7 +120,7 @@ class AddComponent extends Component {
 
 
                         }}
-                        options={['antiquewhite', 'aqua', 'aquamarine','azure','blueviolet','floralwhite','forestgreen']}
+                        options={['turquoise','aqua', 'aquamarine','azure','blueviolet','yellowgreen','forestgreen']}
                         dropdownStyle={{ height: undefined, width: 100 }}
                         dropdownTextStyle={{ fontSize: 14, color: 'black' }}
                         

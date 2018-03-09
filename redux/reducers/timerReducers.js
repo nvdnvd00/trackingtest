@@ -1,6 +1,7 @@
 import {
     ADD_NEW_TIMER,
-    TOGGLE_TIMER
+    TOGGLE_TIMER,
+    ADD_TOTAL_TIMER,
 } from '../actions/actionsTypes';
 
 const timerReducers= (timer =[],action)=>{
@@ -29,7 +30,14 @@ const timerReducers= (timer =[],action)=>{
                 }
 
             )
-    
+        case ADD_TOTAL_TIMER:
+            return timer.map(
+                item=>
+                (item.onDoing === true)?{
+                ...item,
+                totalTime: item.totalTime+=1,
+                }: item
+            )
         default:
             return timer;
     }

@@ -1,10 +1,10 @@
 //import liraries
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image, FlatList, ScrollView, TouchableOpacity } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon from 'react-native-vector-icons/Ionicons';
 import { connect } from 'react-redux';
 import AddTimer from './addTimer';
-import { toggleTimer } from '../../redux/actions';
+import { toggleTimer, addTotalTimer } from '../../redux/actions';
 import moment from 'moment';
 import 'moment/locale/vi';
 var currentDate = moment().locale("vi").format("dddd, Do MMMM ");
@@ -39,27 +39,72 @@ class Dashboard extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            refreshing: false,
+            counter: 0,
+
         };
+        this.countTimeId = 0;
+        this.hours = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23'];
+
+
     }
-    onRefresh() {
-        this.setState({ refreshing: true }, function () { });
+    startCount() {
+
+        this.countTimeId = setInterval(() =>
+            this.updateCount(),
+            1000)
+            ;
+
     }
+
+    updateCount() {
+        this.setState({
+            counter: this.state.counter += 1
+        });
+        this.props.onAddTotalTime();
+    }
+    stopCount() {
+        clearInterval(this.countTimeId);
+        this.setState({ counter: 0 })
+    }
+
 
     static navigationOptions = {
         headerTitle: <HeaderTitle />,
     };
     render() {
+
         return (
             <View style={{ flex: 1 }}>
-                <View style={{ height: 100, backgroundColor: 'grey' }} >
 
+                <View style={{ width: undefined, height: 80, borderBottomWidth: 0.5 }}>
+                    <ScrollView style={{ flex: 1 }} horizontal={true}>
+                        <View style={{ width: undefined, height: 80, flexDirection: 'column' }}>
+                            <View style={{ width: undefined, height: 20, flexDirection: 'row' }}>
+                                {this.hours.map((item, key) =>
+                                    (
+                                        <View key={key}>
+                                            <Text style={{}}>{item}</Text>
+                                            <View style={{ flexDirection: 'row' }}>
+                                                <View style={{ height: 7, width: 50, borderLeftWidth: 1, borderBottomWidth: 0.5 }} ></View>
+                                                <View style={{ height: 7, width: 50, borderLeftWidth: 1, borderBottomWidth: 0.5 }} ></View>
+                                                <View style={{ height: 7, width: 50, borderLeftWidth: 1, borderBottomWidth: 0.5 }} ></View>
+                                                <View style={{ height: 7, width: 50, borderLeftWidth: 1, borderBottomWidth: 0.5 }} ></View>
+                                            </View>
+                                        </View>
+                                    ))}
+                            </View>
+                            <View style={{ top: 4, height: 50, backgroundColor: 'yellowgreen' }}>
+
+                            </View>
+                        </View>
+
+
+                    </ScrollView>
                 </View>
+
                 <ScrollView style={{ flex: 1, }}>
                     <FlatList
                         style={{ height: undefined }}
-                        onRefresh={() => this.onRefresh()}
-                        refreshing={this.state.refreshing}
                         data={this.props.timer}
                         renderItem={({ item }) => {
                             return (
@@ -77,7 +122,9 @@ class Dashboard extends Component {
                                         borderRadius: 7,
                                         justifyContent: 'center'
                                     }}>
-                                        <Text style={{ alignSelf: 'center' }}>00:00</Text>
+                                        <Text style={{ alignSelf: 'center' }}>
+                                            {Math.floor(item.totalTime / 3600)}:{Math.floor((item.totalTime - Math.floor(item.totalTime / 3600) * 3600) / 60)}
+                                        </Text>
                                     </View>
                                     <View>
                                         <View style={{
@@ -113,13 +160,17 @@ class Dashboard extends Component {
                                     </View>
                                     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'flex-end' }}>
                                         <TouchableOpacity style={{ maxWidth: 150 }}
-                                            onPress={() => { this.props.onClickToggle(item.timerId) }}>
+                                            onPress={() => {
+                                                this.props.onClickToggle(item.timerId);
+                                                this.stopCount();
+                                                this.startCount();
+                                            }}>
 
                                             {
                                                 item.onDoing === false ? <Icon style={{
-                                                    right: 5,
+                                                    right: 10,
                                                     alignSelf: 'flex-end'
-                                                }} name="access-time" size={50} color='grey' />
+                                                }} name="ios-time" size={50} color='grey' />
                                                     : <View style={{ flexDirection: 'row' }}>
                                                         <View style={{
                                                             justifyContent: 'center'
@@ -128,16 +179,19 @@ class Dashboard extends Component {
                                                                 backgroundColor: item.color,
                                                                 height: 30,
                                                                 width: 55,
-                                                                
+                                                                borderTopLeftRadius: 7,
+                                                                borderBottomLeftRadius: 7,
                                                                 justifyContent: 'center'
                                                             }}>
-                                                                <Text style={{ alignSelf: 'center' }}>00:00</Text>
+                                                                <Text style={{ alignSelf: 'center', right: 3 }}>
+                                                                    {Math.floor(this.state.counter / 60)}:{this.state.counter - Math.floor(this.state.counter / 60) * 60}
+                                                                </Text>
                                                             </View>
                                                         </View>
                                                         <Icon style={{
-                                                            right: 5,
+                                                            right: 10,
                                                             alignSelf: 'flex-end'
-                                                        }} name="access-time" size={50} color={item.color} />
+                                                        }} name="ios-time" size={50} color={item.color} />
 
                                                     </View>
                                             }
@@ -172,6 +226,10 @@ function mapDispatchToProps(dispatch) {
     return {
         onClickToggle: (timerId) => {
             dispatch(toggleTimer(timerId));
+
+        },
+        onAddTotalTime: () => {
+            dispatch(addTotalTimer());
         }
     }
 }

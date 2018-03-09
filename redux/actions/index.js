@@ -1,6 +1,7 @@
 import { 
     ADD_NEW_TIMER,
-    TOGGLE_TIMER 
+    TOGGLE_TIMER ,
+    ADD_TOTAL_TIMER,
 } from './actionsTypes';
 
 let newTimerId = 0;
@@ -22,5 +23,11 @@ export const toggleTimer = (timerId) =>{
     return {
         type: TOGGLE_TIMER,
         timerId: timerId,
+    }
+}
+
+export const addTotalTimer=() =>{
+    return {
+        type: ADD_TOTAL_TIMER,
     }
 }
