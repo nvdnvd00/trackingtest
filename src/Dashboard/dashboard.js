@@ -12,7 +12,9 @@ var currentDate = moment().locale("vi").format("dddd, Do MMMM ");
 
 class HeaderTitle extends Component {
     render() {
+        console.disableYellowBox = true;
         return (
+            
             <View style={{ flexDirection: 'row' }}>
                 <View style={{ flex: 1, alignItems: 'center' }}>
                     <Image
