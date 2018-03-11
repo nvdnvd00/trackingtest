@@ -31,7 +31,8 @@ class AddComponent extends Component {
         this.state = ({
             newTimerName: '',
             colorChoose: '',
-            newTimerDescription: ''
+            newTimerDescription: '',
+            dataColor: ['#9CC89D','#82CBBC','#C77C57', '#C16672','#7785B3']
         })
     }
     static navigationOptions = ({ navigation }) => ({
@@ -120,9 +121,9 @@ class AddComponent extends Component {
 
 
                         }}
-                        options={['turquoise','aqua', 'aquamarine','azure','blueviolet','yellowgreen','forestgreen']}
+                        options={this.state.dataColor}
                         dropdownStyle={{ height: undefined, width: 100 }}
-                        dropdownTextStyle={{ fontSize: 14, color: 'black' }}
+                        dropdownTextStyle={{ fontSize: 14}}
                         
                         onSelect={(idx, value) => {
                             this.setState({ colorChoose: value });

@@ -13,7 +13,7 @@ class AddTimer extends Component {
                 alignItems: 'center',
                 height: 60,
                 borderBottomWidth: 0.5,
-                borderBottomColor: 'grey'
+                borderBottomColor: '#E5E5E5'
             }}>
                 <TouchableOpacity style={{ flex: 1, flexDirection: 'row' }}
                     onPress={this.props.onPress}

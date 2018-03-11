@@ -1,9 +1,10 @@
 import timerReducers from './timerReducers';
+import timerShowReducers from './timerShowReducers';
 import {combineReducers} from 'redux';
 
 const allReducers = combineReducers (
     {
-        timerReducers
+        timerReducers,timerShowReducers,
     }
 );
 
