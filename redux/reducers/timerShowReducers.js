@@ -3,9 +3,11 @@ import {
     UPDATE_TIMER_SHOW
 } from '../actions/actionsTypes';
 
-const timerShowReducers= (timerShow =[],action)=>{
+const timerShowDefault=[]
+const timerShowReducers= (timerShow =timerShowDefault,action)=>{
     switch (action.type) {
         case ADD_NEW_TIMER_SHOW:
+
             return [
                 ...timerShow,
                 {
@@ -17,12 +19,13 @@ const timerShowReducers= (timerShow =[],action)=>{
                 }
             ]
         case UPDATE_TIMER_SHOW:
-        return timerShow.map((item)=>{
-          
-            (item.timerShowId===timerShow.length-1)?
-            {...item,timerShowWidth: timerShow.timerShowWidth++}:item
-            
+        const Arr=timerShow.map(item=>{
+            if (item.timerShowId===action.timerShowId){
+                return {...item, timerShowWidth:action.timerShowWidth}
+            }
+            return item
         })
+        return Arr;
         
         default:
             return timerShow;

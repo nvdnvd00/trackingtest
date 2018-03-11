@@ -11,12 +11,13 @@ import {
   Text,
   View
 } from 'react-native';
+import logger from 'redux-logger';
 
 import {Provider} from 'react-redux';
-import { createStore } from 'redux';
+import { applyMiddleware,createStore } from 'redux';
 import allReducers from './redux/reducers';
 import StackNav from './src/Navigation';
-let store = createStore(allReducers);
+let store = createStore(allReducers,applyMiddleware(logger));
 
 class App extends Component {
   render() {

@@ -47,14 +47,16 @@ class Dashboard extends Component {
         };
         this.countTimeId = 0;
         this.countTime2 = 0;
+        this.countTime3 = 0;
         this.hours = ['1 AM', '2 AM', '3 AM', '4 AM', '5 AM', '6 AM', '7 AM', '8 AM', '9 AM', '10 AM', '11 AM', '12 PM', '1 PM', '2 PM', '3 PM', '4 PM', '5 PM', '6 PM', '7 PM', '8 PM', '9 PM', '10 PM', '11 PM'];
 
     }
 
 
-    componentDidMount() {
+    componentWillMount() {
         this.countTime2 = setInterval(() => {
-            this.setState({ now: this.state.now + 1 });
+            this.setState({ now: this.state.now + 40 });
+            this.props.onUpdateTimerShow(this.state.now * 4320 / 86400);
         }
             ,
             1000
@@ -75,13 +77,18 @@ class Dashboard extends Component {
             counter: this.state.counter += 1
         });
         this.props.onAddTotalTime();
+
         // this.props.onUpdateTimerShow();
     }
     stopCount() {
         clearInterval(this.countTimeId);
         this.setState({ counter: 0 })
     }
-
+    onUpdateTimerShowState() {
+        this.countTime3 = setInterval(() => {
+            this.props.onUpdateTimerShow();
+        })
+    }
 
     static navigationOptions = {
         headerTitle: <HeaderTitle />,
@@ -91,43 +98,43 @@ class Dashboard extends Component {
 
         return (
 
-            <View style={{ flex: 1,backgroundColor:'#FFFFFF' }}>
+            <View style={{ flex: 1, backgroundColor: '#FFFFFF' }}>
                 {/* // {alert(this.state.now)} */}
-                <View style={{ width: undefined, height: 85, borderBottomWidth: 1,borderColor:'#EFEDF0' }}>
+                <View style={{ width: undefined, height: 85, borderBottomWidth: 1, borderColor: '#EFEDF0' }}>
                     <ScrollView style={{ flex: 1 }} horizontal={true}>
                         <View style={{ width: undefined, height: 80, flexDirection: 'column' }}>
                             <View style={{ width: undefined, height: 20, flexDirection: 'row' }}>
-                                <View style={{width:90,backgroundColor:'transparent'}}></View>
+                                <View style={{ width: 90, backgroundColor: 'transparent' }}></View>
                                 {this.hours.map((item, key) =>
                                     (
-                                        <View key={key} style={{width:180}}>
-                                            <Text style={{fontSize:12,paddingTop:5,alignSelf:'center'}}>{item}</Text>
-                                            
+                                        <View key={key} style={{ width: 180 }}>
+                                            <Text style={{ fontSize: 12, paddingTop: 5, alignSelf: 'center' }}>{item}</Text>
+
                                         </View>
                                     ))}
-                                    <View style={{width:90,backgroundColor:'transparent'}}></View>
+                                <View style={{ width: 90, backgroundColor: 'transparent' }}></View>
                             </View>
                             <View style={{ width: undefined, flexDirection: 'row' }}>
                                 {this.hours.map((item, key) =>
                                     (
                                         <View key={key} style={{ flexDirection: 'row' }}>
-                                           
-                                          
-                                                <View style={{ height: 7, width: 45, borderLeftWidth: 1 }} ></View>
-                                                <View style={{ height: 7, width: 45, borderLeftWidth: 0.5,borderColor:'#B7B5B8'}} ></View>
-                                                <View style={{ height: 7, width: 45, borderLeftWidth: 0.5,borderColor:'#B7B5B8' }} ></View>
-                                                <View style={{ height: 7, width: 45, borderLeftWidth: 0.5,borderColor:'#B7B5B8'}} ></View>
-                                          
+
+
+                                            <View style={{ height: 7, width: 45, borderLeftWidth: 1 }} ></View>
+                                            <View style={{ height: 7, width: 45, borderLeftWidth: 0.5, borderColor: '#B7B5B8' }} ></View>
+                                            <View style={{ height: 7, width: 45, borderLeftWidth: 0.5, borderColor: '#B7B5B8' }} ></View>
+                                            <View style={{ height: 7, width: 45, borderLeftWidth: 0.5, borderColor: '#B7B5B8' }} ></View>
+
                                         </View>
                                     ))}
-                                    <View style={{ height: 7, width: 45, borderLeftWidth: 1 }} ></View>
-                                                <View style={{ height: 7, width: 45, borderLeftWidth: 0.5,borderColor:'#B7B5B8'}} ></View>
-                                                <View style={{ height: 7, width: 45, borderLeftWidth: 0.5,borderColor:'#B7B5B8' }} ></View>
-                                                <View style={{ height: 7, width: 45, borderLeftWidth: 0.5,borderColor:'#B7B5B8'}} ></View>
+                                <View style={{ height: 7, width: 45, borderLeftWidth: 1 }} ></View>
+                                <View style={{ height: 7, width: 45, borderLeftWidth: 0.5, borderColor: '#B7B5B8' }} ></View>
+                                <View style={{ height: 7, width: 45, borderLeftWidth: 0.5, borderColor: '#B7B5B8' }} ></View>
+                                <View style={{ height: 7, width: 45, borderLeftWidth: 0.5, borderColor: '#B7B5B8' }} ></View>
                             </View>
-                           
 
-                            <View style={{height: 50, backgroundColor: '#EEEAED' }}>
+
+                            <View style={{ height: 50, backgroundColor: '#EEEAED' }}>
                                 <FlatList
                                     style={{ height: undefined }}
                                     data={this.props.timerShow}
@@ -136,12 +143,12 @@ class Dashboard extends Component {
                                             <View style={{
                                                 height: 50,
                                                 position: 'absolute',
-                                                backgroundColor: 'blue',
+
                                                 left: item.timerShowLeft,
                                                 width: (this.state.now * 4320 / 86400) - item.timerShowLeft,
                                                 backgroundColor: item.timerShowColor,
                                             }}>
-                                                <Text style={{height:25,paddingLeft:10}}>{item.timerShowName}</Text>
+                                                <Text style={{ height: 25, alignSelf: 'center' }}>{item.timerShowName}</Text>
 
                                             </View>
                                         );
@@ -150,16 +157,16 @@ class Dashboard extends Component {
                                 >
                                 </FlatList>
 
-                                
+
                             </View>
-                            <View style={{
-                                    height: 85,
-                                    position: 'absolute',
-                                    borderLeftWidth: 1,
-                                    borderColor: 'black',
-                                    left: this.state.now * 4320 / 86400
-                                }}>
-                                </View>
+                            <View accessible={true} style={{
+                                height: 85,
+                                position: 'absolute',
+                                borderLeftWidth: 1,
+                                borderColor: 'black',
+                                left: this.state.now * 4320 / 86400
+                            }}>
+                            </View>
                         </View>
 
 
@@ -186,18 +193,18 @@ class Dashboard extends Component {
                                         borderRadius: 7,
                                         justifyContent: 'center'
                                     }}>
-                                    {Math.floor((item.totalTime - Math.floor(item.totalTime / 3600) * 3600) / 60)>9?
-                                        <Text style={{ alignSelf: 'center',color:'#FFFFFF' ,fontSize:14}}>
-                                        
-                                            {Math.floor(item.totalTime / 3600)}:{Math.floor((item.totalTime - Math.floor(item.totalTime / 3600) * 3600) / 60)}
-                                            
-                                        </Text>
-                                        :
-                                        <Text style={{ alignSelf: 'center',color:'#FFFFFF' ,fontSize:14}}>
-                                        
-                                            {Math.floor(item.totalTime / 3600)}:0{Math.floor((item.totalTime - Math.floor(item.totalTime / 3600) * 3600) / 60)}
-                                            
-                                        </Text>}
+                                        {Math.floor((item.totalTime - Math.floor(item.totalTime / 3600) * 3600) / 60) > 9 ?
+                                            <Text style={{ alignSelf: 'center', color: '#FFFFFF', fontSize: 14 }}>
+
+                                                {Math.floor(item.totalTime / 3600)}:{Math.floor((item.totalTime - Math.floor(item.totalTime / 3600) * 3600) / 60)}
+
+                                            </Text>
+                                            :
+                                            <Text style={{ alignSelf: 'center', color: '#FFFFFF', fontSize: 14 }}>
+
+                                                {Math.floor(item.totalTime / 3600)}:0{Math.floor((item.totalTime - Math.floor(item.totalTime / 3600) * 3600) / 60)}
+
+                                            </Text>}
 
                                     </View>
                                     <View>
@@ -210,7 +217,7 @@ class Dashboard extends Component {
                                                 {
                                                     fontSize: 14,
                                                     paddingLeft: 5,
-                                                    paddingTop:5,
+                                                    paddingTop: 5,
                                                     color: '#929193'
                                                 }
                                             }>
@@ -225,7 +232,7 @@ class Dashboard extends Component {
                                                         fontSize: 14,
                                                         fontWeight: 'bold',
                                                         paddingLeft: 5,
-                                                        paddingTop:5,
+                                                        paddingTop: 5,
                                                         color: '#414141'
                                                     }
                                                 }>
@@ -243,11 +250,11 @@ class Dashboard extends Component {
                                                 this.stopCount();
                                                 this.startCount();
                                                 if (item.onDoing === false) {
-                                                    this.props.onAddNewTimerShow(this.state.now * 4320 / 86400, 0,item.color,item.timerName);
-                                                   // console.log(this.props.timerShow);
+                                                    this.props.onAddNewTimerShow(this.state.now * 4320 / 86400, this.state.now * 4320 / 86400, item.color, item.timerName);
+                                                    //console.log(this.props.timerShow);
                                                 }
                                                 else {
-                                                    this.props.onAddNewTimerShow(this.state.now * 4320 / 86400, 0,'#EEEAED','');
+                                                    this.props.onAddNewTimerShow(this.state.now * 4320 / 86400, this.state.now * 4320 / 86400, '#EEEAED', '');
                                                 }
 
                                             }
@@ -266,14 +273,27 @@ class Dashboard extends Component {
                                                             <View style={{
                                                                 backgroundColor: item.color,
                                                                 height: 30,
-                                                                width: 55,
-                                                                borderTopLeftRadius: 7,
-                                                                borderBottomLeftRadius: 7,
+                                                                width: 65,
+                                                                borderTopLeftRadius: 5,
+                                                                borderBottomLeftRadius: 5,
                                                                 justifyContent: 'center'
                                                             }}>
-                                                                <Text style={{ alignSelf: 'center', right: 3,color:'#FFFFFF' }}>
-                                                                    {Math.floor(this.state.counter / 60)}:{this.state.counter - Math.floor(this.state.counter / 60) * 60}
-                                                                </Text>
+                                                                {(this.state.counter - Math.floor((this.state.counter - Math.floor(this.state.counter / 3600) * 3600) / 60) * 60) <= 9 ?
+                                                                    (Math.floor((this.state.counter - Math.floor(this.state.counter / 3600) * 3600) / 60)) <= 9 ?
+                                                                        <Text style={{ alignSelf: 'center', right: 2, color: '#FFFFFF',fontSize:13 }}>
+                                                                            {Math.floor(this.state.counter / 3600)}:0{Math.floor((this.state.counter - Math.floor(this.state.counter / 3600) * 3600) / 60)}:0{this.state.counter - Math.floor((this.state.counter - Math.floor(this.state.counter / 3600) * 3600) / 60) * 60}
+                                                                        </Text> :
+                                                                        <Text style={{ alignSelf: 'center', right: 2, color: '#FFFFFF',fontSize:13 }}>
+                                                                            {Math.floor(this.state.counter / 3600)}:{Math.floor((this.state.counter - Math.floor(this.state.counter / 3600) * 3600) / 60)}:0{this.state.counter - Math.floor((this.state.counter - Math.floor(this.state.counter / 3600) * 3600) / 60) * 60}
+                                                                        </Text> :
+                                                                    (Math.floor((this.state.counter - Math.floor(this.state.counter / 3600) * 3600) / 60)) <= 9 ?
+                                                                        <Text style={{ alignSelf: 'center', right: 2, color: '#FFFFFF',fontSize:13 }}>
+                                                                            {Math.floor(this.state.counter / 3600)}:0{Math.floor((this.state.counter - Math.floor(this.state.counter / 3600) * 3600) / 60)}:{this.state.counter - Math.floor((this.state.counter - Math.floor(this.state.counter / 3600) * 3600) / 60) * 60}
+                                                                        </Text> :
+                                                                        <Text style={{ alignSelf: 'center', right: 2, color: '#FFFFFF',fontSize:13 }}>
+                                                                            {Math.floor(this.state.counter / 3600)}:{Math.floor((this.state.counter - Math.floor(this.state.counter / 3600) * 3600) / 60)}:{this.state.counter - Math.floor((this.state.counter - Math.floor(this.state.counter / 3600) * 3600) / 60) * 60}
+                                                                        </Text>
+                                                                }
                                                             </View>
                                                         </View>
                                                         <Icon style={{
@@ -298,6 +318,7 @@ class Dashboard extends Component {
             </View>
         );
     }
+
     componentWillUnMount() {
         clearInterval(this.countTime2);
     }
@@ -323,11 +344,11 @@ function mapDispatchToProps(dispatch) {
         onAddTotalTime: () => {
             dispatch(addTotalTimer());
         },
-        onAddNewTimerShow: (inputTimerShowLeft, inputTimerShowWidth,inputColor,inputShowName) => {
-            dispatch(addNewTimerShow(inputTimerShowLeft, inputTimerShowWidth,inputColor,inputShowName));
+        onAddNewTimerShow: (inputTimerShowLeft, inputTimerShowWidth, inputColor, inputShowName) => {
+            dispatch(addNewTimerShow(inputTimerShowLeft, inputTimerShowWidth, inputColor, inputShowName));
         },
-        onUpdateTimerShow: () => {
-            dispatch(updateTimerShow());
+        onUpdateTimerShow: (inputUpdateWidth) => {
+            dispatch(updateTimerShow(inputUpdateWidth));
         },
     }
 }

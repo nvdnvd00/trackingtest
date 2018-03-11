@@ -47,8 +47,10 @@ export const addNewTimerShow=(inputTimerShowLeft,inputTimerShowWidth,inputColor,
         timerShowName: inputShowName
     }
 }
-export const updateTimerShow = () =>{
+export const updateTimerShow = (inputUpdateTimerShowWidth) =>{
     return {
         type: UPDATE_TIMER_SHOW,
+        timerShowId: newTimerShowId-1,
+        timerShowWidth: inputUpdateTimerShowWidth
     }
 }
