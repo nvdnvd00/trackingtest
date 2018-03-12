@@ -17,7 +17,10 @@ import {Provider} from 'react-redux';
 import { applyMiddleware,createStore } from 'redux';
 import allReducers from './redux/reducers';
 import StackNav from './src/Navigation';
-let store = createStore(allReducers,applyMiddleware(logger));
+let store = createStore(
+  allReducers,
+  //applyMiddleware(logger)
+);
 
 class App extends Component {
   render() {

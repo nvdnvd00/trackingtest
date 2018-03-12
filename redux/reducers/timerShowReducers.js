@@ -13,15 +13,19 @@ const timerShowReducers= (timerShow =timerShowDefault,action)=>{
                 {
                     timerShowId: action.timerShowId,
                     timerShowLeft: action.timerShowLeft,
-                    timerShowWidth: action.timerShowWidth,
+                    timerShowWidth: 0,
                     timerShowColor: action.timerShowColor,
                     timerShowName: action.timerShowName,
+                    totalTimerShow: 0,
                 }
             ]
         case UPDATE_TIMER_SHOW:
         const Arr=timerShow.map(item=>{
             if (item.timerShowId===action.timerShowId){
-                return {...item, timerShowWidth:action.timerShowWidth}
+                return {
+                    ...item, 
+                    timerShowWidth: action.timerShowWidth-item.timerShowLeft, 
+                    totalTimerShow: item.totalTimerShow+1}
             }
             return item
         })

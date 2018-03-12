@@ -11,19 +11,7 @@ const resetAction = NavigationActions.reset({
     actions: [NavigationActions.navigate({ routeName: 'DashboardScreen' })],
 });
 
-class HeaderTitle extends Component {
-    render() {
-        return (
-            <View >
 
-                <View style={{ flex: 1, justifyContent: 'center' }}>
-                    <Text>New Timer</Text>
-                </View>
-
-            </View>
-        );
-    }
-}
 // create a component
 class AddComponent extends Component {
     constructor(props) {
@@ -35,10 +23,8 @@ class AddComponent extends Component {
             dataColor: ['#9CC89D','#82CBBC','#C77C57', '#C16672','#7785B3']
         })
     }
-    static navigationOptions = ({ navigation }) => ({
-        headerTitle: <HeaderTitle />,
-    });
-
+ 
+    
     render() {
         return (
             <View style={{
@@ -152,7 +138,7 @@ class AddComponent extends Component {
                         }
 
                         this.props.onClickAdd(this.state.newTimerName, this.state.newTimerDescription, this.state.colorChoose);
-                        this.props.navigation.dispatch(resetAction);
+                       // this.props.navigation.dispatch(resetAction);
                     }}
 
 

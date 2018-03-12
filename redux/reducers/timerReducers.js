@@ -35,7 +35,7 @@ const timerReducers= (timer =[],action)=>{
                 item=>
                 (item.onDoing === true)?{
                 ...item,
-                totalTime: item.totalTime+=1,
+                totalTime: item.totalTime+1,
                 }: item
             )
         default:
