@@ -37,7 +37,7 @@ export const addTotalTimer=() =>{
 
 
 
-export const addNewTimerShow=(inputTimerShowLeft,inputTimerShowWidth,inputColor,inputShowName)=>{
+export const addNewTimerShow=(inputTimerShowLeft,inputTimerShowWidth,inputColor,inputShowName,inputShowDes)=>{
     return{
         type: ADD_NEW_TIMER_SHOW,
         timerShowId: newTimerShowId++,
@@ -45,6 +45,7 @@ export const addNewTimerShow=(inputTimerShowLeft,inputTimerShowWidth,inputColor,
         timerShowWidth: inputTimerShowWidth,
         timerShowColor: inputColor,
         timerShowName: inputShowName,
+        timerShowDes: inputShowDes
         
     }
 }

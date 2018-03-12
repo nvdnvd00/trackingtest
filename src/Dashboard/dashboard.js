@@ -127,16 +127,16 @@ class Dashboard extends Component {
                         horizontal={true}>
                         <View style={{ width: undefined, height: 80, flexDirection: 'column' }}>
                             <View style={{ width: undefined, height: 20, flexDirection: 'row' }}>
-                                <View style={{ width: 90, backgroundColor: 'transparent' }}>
+                                <View style={{ width: 90/3, backgroundColor: 'transparent' }}>
                                 </View>
                                 {this.hours.map((item, key) =>
                                     (
-                                        <View key={key} style={{ width: 180 }}>
+                                        <View key={key} style={{ width: 180/3 }}>
                                             <Text style={{ fontSize: 12, paddingTop: 5, alignSelf: 'center' }}>{item}</Text>
 
                                         </View>
                                     ))}
-                                <View style={{ width: 90, backgroundColor: 'transparent' }}></View>
+                                <View style={{ width: 90/3, backgroundColor: 'transparent' }}></View>
                             </View>
                             <View style={{ width: undefined, flexDirection: 'row' }}>
                                 {this.hours.map((item, key) =>
@@ -144,21 +144,21 @@ class Dashboard extends Component {
                                         <View key={key} style={{ flexDirection: 'row' }}>
 
 
-                                            <View style={{ height: 7, width: 45, borderLeftWidth: 1 }} ></View>
-                                            <View style={{ height: 7, width: 45, borderLeftWidth: 0.5, borderColor: '#B7B5B8' }} ></View>
-                                            <View style={{ height: 7, width: 45, borderLeftWidth: 0.5, borderColor: '#B7B5B8' }} ></View>
-                                            <View style={{ height: 7, width: 45, borderLeftWidth: 0.5, borderColor: '#B7B5B8' }} ></View>
+                                            <View style={{ height: 7, width: 45/3, borderLeftWidth: 1 }} ></View>
+                                            <View style={{ height: 7, width: 45/3, borderLeftWidth: 0.5, borderColor: '#B7B5B8' }} ></View>
+                                            <View style={{ height: 7, width: 45/3, borderLeftWidth: 0.5, borderColor: '#B7B5B8' }} ></View>
+                                            <View style={{ height: 7, width: 45/3, borderLeftWidth: 0.5, borderColor: '#B7B5B8' }} ></View>
 
                                         </View>
                                     ))}
-                                <View style={{ height: 7, width: 45, borderLeftWidth: 1 }} ></View>
-                                <View style={{ height: 7, width: 45, borderLeftWidth: 0.5, borderColor: '#B7B5B8' }} ></View>
-                                <View style={{ height: 7, width: 45, borderLeftWidth: 0.5, borderColor: '#B7B5B8' }} ></View>
-                                <View style={{ height: 7, width: 45, borderLeftWidth: 0.5, borderColor: '#B7B5B8' }} ></View>
+                                <View style={{ height: 7, width: 45/3, borderLeftWidth: 1 }} ></View>
+                                <View style={{ height: 7, width: 45/3, borderLeftWidth: 0.5, borderColor: '#B7B5B8' }} ></View>
+                                <View style={{ height: 7, width: 45/3, borderLeftWidth: 0.5, borderColor: '#B7B5B8' }} ></View>
+                                <View style={{ height: 7, width: 45/3, borderLeftWidth: 0.5, borderColor: '#B7B5B8' }} ></View>
                             </View>
+<View style={{ marginTop:10}}></View>
 
-
-                            <View style={{ height: 50/2, backgroundColor: '#EEEAED' }}>
+                            <View style={{ height: 50/2+10, backgroundColor: '#EEEAED' }}>
                                 <FlatList
                                     style={{ height: undefined }}
                                     data={this.props.timerShow}
@@ -168,8 +168,8 @@ class Dashboard extends Component {
                                                 height: 50/2,
                                                 position: 'absolute',
                                                 
-                                                left: item.timerShowLeft,
-                                                width: item.timerShowWidth,
+                                                left: item.timerShowLeft/3,
+                                                width: item.timerShowWidth/3,
                                                 backgroundColor: item.timerShowColor,
                                             }}>
                                            
@@ -184,18 +184,18 @@ class Dashboard extends Component {
                                     keyExtractor={(item) => item.timerShowId}
                                 >
                                 </FlatList>
-                                <View style={{ position:'absolute',opacity:0.3,height: 50/2, backgroundColor: '#EEEAED',left: this.state.now*4320/86400,width: 4320-this.state.now*4320/86400}}></View>
+                                <View style={{ position:'absolute',opacity:0.3,height: 50/2, backgroundColor: '#EEEAED',left: this.state.now*4320/86400/3,width: (4320-this.state.now*4320/86400)/3}}></View>
 
-                                <View style={{ position:'absolute',opacity:0.3,height: 50/2, backgroundColor: this.state.currentColor,left: this.state.now*4320/86400,width: 4320-this.state.now*4320/86400}}></View>
+                                <View style={{ position:'absolute',opacity:0.3,height: 50/2, backgroundColor: this.state.currentColor,left: (this.state.now*4320/86400)/3,width: (4320-this.state.now*4320/86400)/3}}></View>
 
 
                             </View>
                             <View style={{
-                                height: 85/2,
+                                height: 85,
                                 position: 'absolute',
                                 borderLeftWidth: 1,
                                 borderColor: 'black',
-                                left: this.state.now * 4320 / 86400
+                                left: this.state.now * 4320 / 86400/3
                             }}>
                             </View>
                         </View>
@@ -259,8 +259,11 @@ class Dashboard extends Component {
                                                 backgroundColor: item.timerShowColor,
                                             }}>
                                           
-                                                <Text style={{ top: 5, height: 25, alignSelf: 'center', fontSize: 12, color: '#FFFFFF' }}>
-                                                {item.timerShowName}
+                                                <Text style={{ paddingLeft:5, paddingRight:5,top: 5, height: 25, alignSelf: 'center', fontSize: 12, color: '#FFFFFF' }}
+                                                numberOfLines={1}
+                                                ellipsizeMode='tail'
+                                                >
+                                                {item.timerShowName} {item.timerShowDes}
                                                 </Text>
                                        
                                   
@@ -387,12 +390,12 @@ class Dashboard extends Component {
                                                 this.stopCount();
                                                 this.startCount();
                                                 if (item.onDoing === false) {
-                                                    this.props.onAddNewTimerShow(this.state.now * 4320 / 86400, 0, item.color, item.timerName);
+                                                    this.props.onAddNewTimerShow(this.state.now * 4320 / 86400, 0, item.color, item.timerName,' - '+item.timerDescription);
                                                     this.toggleRunning=true;
-                                                    //console.log(this.props.timerShow);
+                                                    
                                                 }
                                                 else {
-                                                    this.props.onAddNewTimerShow(this.state.now * 4320 / 86400, 0, '#EEEAED', '');
+                                                    this.props.onAddNewTimerShow(this.state.now * 4320 / 86400, 0, '#EEEAED', '','');
                                                     this.toggleRunning=false;
                                                 }
 
@@ -645,8 +648,8 @@ function mapDispatchToProps(dispatch) {
         onAddTotalTime: () => {
             dispatch(addTotalTimer());
         },
-        onAddNewTimerShow: (inputTimerShowLeft, inputTimerShowWidth, inputColor, inputShowName) => {
-            dispatch(addNewTimerShow(inputTimerShowLeft, inputTimerShowWidth, inputColor, inputShowName));
+        onAddNewTimerShow: (inputTimerShowLeft, inputTimerShowWidth, inputColor, inputShowName,inputShowDes) => {
+            dispatch(addNewTimerShow(inputTimerShowLeft, inputTimerShowWidth, inputColor, inputShowName,inputShowDes));
         },
         onUpdateTimerShow: (input) => {
             dispatch(updateTimerShow(input));
