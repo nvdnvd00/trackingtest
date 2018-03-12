@@ -12,39 +12,6 @@ import AddComponent from '../AddTimer/Add';
 import 'moment/locale/vi';
 var currentDate = moment().locale("en").format("dddd, MMMM DD ");
 
-
-// class HeaderTitle extends Component {
-//     render() {
-
-//         return (
-
-//             <View style={{ flexDirection: 'row' }}>
-//                 <View style={{ flex: 1, alignItems: 'center' }}>
-//                     <Image
-//                         source={require('../../assets/calendar.png')}
-//                         style={{ width: 25, height: 25 }}
-//                     />
-//                 </View>
-//                 <View style={{ flex: 6, alignItems: 'center' }}>
-//                     <Text>{currentDate}</Text>
-//                     <Text>{this.props.allTime}</Text>
-//                     {console.log(this.props.allTime)}
-
-//                 </View>
-//                 <View style={{ flex: 1, alignItems: 'center' }}>
-//                     <Image
-//                         source={require('../../assets/settings.png')}
-//                         style={{ width: 25, height: 25 }}
-//                     />
-//                 </View>
-//             </View>
-//         );
-//     }
-// }
-// HeaderTitle.propTypes = {
-//     allTime: PropTypes.number,
-// }
-
 // create a component
 class Dashboard extends Component {
     static navigationOptions = ({ navigation }) => {
@@ -74,11 +41,11 @@ class Dashboard extends Component {
                         </View>),
             headerLeft: (<Image
                 source={require('../../assets/calendar.png')}
-                style={{ width: 25, height: 25, marginLeft: 5 }}
+                style={{ width: 25, height: 25, marginLeft: 15}}
             />),
             headerRight: (<Image
                 source={require('../../assets/settings.png')}
-                style={{ width: 25, height: 25, marginRight: 5 }}
+                style={{ width: 25, height: 25, marginRight: 15}}
             />)
         }
     }
@@ -92,10 +59,11 @@ class Dashboard extends Component {
             newTimerName: '',
             colorChoose: '',
             newTimerDescription: '',
-            dataColor: ['#9CC89D', '#82CBBC', '#C77C57', '#C16672', '#7785B3']
+            dataColor: ['#7785B3','#83C382', '#82CBBC', '#C77C57', '#C16672']
 
 
         };
+        this.toggleRunning=false; //dong ho co dang chay khong, set lai neu can
         this.onOpenAdd = false;
         this.countTimeId = 0;
         this.countTime2 = 0;
@@ -153,9 +121,85 @@ class Dashboard extends Component {
         return (
 
             <View style={{ flex: 1, backgroundColor: '#FFFFFF' }}>
-          
+                {this.toggleRunning===false?
+                <View style={{ width: undefined, height: 85, borderBottomWidth: 1, borderColor: '#EFEDF0' }}>
+                    <ScrollView style={{ flex: 1 }}
+                        horizontal={true}
+                    >
+                        <View style={{ width: undefined, height: 80, flexDirection: 'column' }}>
+                            <View style={{ width: undefined, height: 20, flexDirection: 'row' }}>
+                                <View style={{ width: 90/3, backgroundColor: 'transparent' }}></View>
+                                {this.hours.map((item, key) =>
+                                    (
+                                        <View key={key} style={{ width: 180/3 }}>
+                                            <Text style={{ fontSize: 12, paddingTop: 5, alignSelf: 'center' }}>{item}</Text>
+
+                                        </View>
+                                    ))}
+                                <View style={{ width: 90/3, backgroundColor: 'transparent' }}></View>
+                            </View>
+                            <View style={{ width: undefined, flexDirection: 'row' }}>
+                                {this.hours.map((item, key) =>
+                                    (
+                                        <View key={key} style={{ flexDirection: 'row' }}>
+
+
+                                            <View style={{ height: 7, width: 45/3, borderLeftWidth: 1 }} ></View>
+                                            <View style={{ height: 7, width: 45/3, borderLeftWidth: 0.5, borderColor: '#B7B5B8' }} ></View>
+                                            <View style={{ height: 7, width: 45/3, borderLeftWidth: 0.5, borderColor: '#B7B5B8' }} ></View>
+                                            <View style={{ height: 7, width: 45/3, borderLeftWidth: 0.5, borderColor: '#B7B5B8' }} ></View>
+
+                                        </View>
+                                    ))}
+                                <View style={{ height: 7, width: 45/3, borderLeftWidth: 1 }} ></View>
+                                <View style={{ height: 7, width: 45/3, borderLeftWidth: 0.5, borderColor: '#B7B5B8' }} ></View>
+                                <View style={{ height: 7, width: 45/3, borderLeftWidth: 0.5, borderColor: '#B7B5B8' }} ></View>
+                                <View style={{ height: 7, width: 45/3, borderLeftWidth: 0.5, borderColor: '#B7B5B8' }} ></View>
+                            </View>
+
+<View style={{height: 10,backgroundColor: 'transparent'}}></View>
+                            <View style={{ height: 50/2, backgroundColor: '#EEEAED' }}>
+                            
+                                <FlatList
+                                    style={{ height: undefined }}
+                                    data={this.props.timerShow}
+                                    renderItem={({ item }) => {
+                                        return (
+                                            <View style={{
+                                                height: 50/2,
+                                                position: 'absolute',
+                                              
+                                                left: item.timerShowLeft,
+                                                width: ((this.state.now * 4320 / 86400) - item.timerShowLeft)/3,
+                                                backgroundColor: item.timerShowColor,
+                                            }}>
+                                            </View>
+
+                                        );
+                                    }}
+                                    keyExtractor={(item) => item.timerShowId}
+                                >
+                                </FlatList>
+                                <View style={{ opacity:0.3,height: 50/2, backgroundColor: this.state.currentColor,left: (this.state.now*4320/86400)/3,width: (4320-this.state.now*4320/86400)/3}}></View>
+
+
+                            </View>
+                            <View style={{
+                                height: 85,
+                                position: 'absolute',
+                                borderLeftWidth: 1,
+                                borderColor: 'black',
+                                left: (this.state.now * 4320 / 86400)/3
+                            }}>
+                            </View>
+                        </View>
+
+
+                    </ScrollView>
+                </View>
+                :
                 
-                {/* // {alert(this.state.now)} */}
+                
                 <View style={{ width: undefined, height: 85, borderBottomWidth: 1, borderColor: '#EFEDF0' }}>
                     <ScrollView style={{ flex: 1 }}
                         horizontal={true}
@@ -254,7 +298,7 @@ class Dashboard extends Component {
 
                     </ScrollView>
                 </View>
-
+                }
                 <ScrollView style={{ flex: 1, }}>
                     <FlatList
                         style={{ height: undefined }}
@@ -333,10 +377,12 @@ class Dashboard extends Component {
                                                 this.startCount();
                                                 if (item.onDoing === false) {
                                                     this.props.onAddNewTimerShow(this.state.now * 4320 / 86400, 0, item.color, item.timerName);
+                                                    this.toggleRunning=true;
                                                     //console.log(this.props.timerShow);
                                                 }
                                                 else {
                                                     this.props.onAddNewTimerShow(this.state.now * 4320 / 86400, 0, '#EEEAED', '');
+                                                    this.toggleRunning=false;
                                                 }
 
 

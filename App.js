@@ -19,7 +19,7 @@ import allReducers from './redux/reducers';
 import StackNav from './src/Navigation';
 let store = createStore(
   allReducers,
-  //applyMiddleware(logger)
+  applyMiddleware(logger)
 );
 
 class App extends Component {
