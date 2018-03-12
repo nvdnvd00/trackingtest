@@ -124,19 +124,19 @@ class Dashboard extends Component {
                 {this.toggleRunning===false?
                 <View style={{ width: undefined, height: 85, borderBottomWidth: 1, borderColor: '#EFEDF0' }}>
                     <ScrollView style={{ flex: 1 }}
-                        horizontal={true}
-                    >
+                        horizontal={true}>
                         <View style={{ width: undefined, height: 80, flexDirection: 'column' }}>
                             <View style={{ width: undefined, height: 20, flexDirection: 'row' }}>
-                                <View style={{ width: 90/3, backgroundColor: 'transparent' }}></View>
+                                <View style={{ width: 90, backgroundColor: 'transparent' }}>
+                                </View>
                                 {this.hours.map((item, key) =>
                                     (
-                                        <View key={key} style={{ width: 180/3 }}>
+                                        <View key={key} style={{ width: 180 }}>
                                             <Text style={{ fontSize: 12, paddingTop: 5, alignSelf: 'center' }}>{item}</Text>
 
                                         </View>
                                     ))}
-                                <View style={{ width: 90/3, backgroundColor: 'transparent' }}></View>
+                                <View style={{ width: 90, backgroundColor: 'transparent' }}></View>
                             </View>
                             <View style={{ width: undefined, flexDirection: 'row' }}>
                                 {this.hours.map((item, key) =>
@@ -144,22 +144,21 @@ class Dashboard extends Component {
                                         <View key={key} style={{ flexDirection: 'row' }}>
 
 
-                                            <View style={{ height: 7, width: 45/3, borderLeftWidth: 1 }} ></View>
-                                            <View style={{ height: 7, width: 45/3, borderLeftWidth: 0.5, borderColor: '#B7B5B8' }} ></View>
-                                            <View style={{ height: 7, width: 45/3, borderLeftWidth: 0.5, borderColor: '#B7B5B8' }} ></View>
-                                            <View style={{ height: 7, width: 45/3, borderLeftWidth: 0.5, borderColor: '#B7B5B8' }} ></View>
+                                            <View style={{ height: 7, width: 45, borderLeftWidth: 1 }} ></View>
+                                            <View style={{ height: 7, width: 45, borderLeftWidth: 0.5, borderColor: '#B7B5B8' }} ></View>
+                                            <View style={{ height: 7, width: 45, borderLeftWidth: 0.5, borderColor: '#B7B5B8' }} ></View>
+                                            <View style={{ height: 7, width: 45, borderLeftWidth: 0.5, borderColor: '#B7B5B8' }} ></View>
 
                                         </View>
                                     ))}
-                                <View style={{ height: 7, width: 45/3, borderLeftWidth: 1 }} ></View>
-                                <View style={{ height: 7, width: 45/3, borderLeftWidth: 0.5, borderColor: '#B7B5B8' }} ></View>
-                                <View style={{ height: 7, width: 45/3, borderLeftWidth: 0.5, borderColor: '#B7B5B8' }} ></View>
-                                <View style={{ height: 7, width: 45/3, borderLeftWidth: 0.5, borderColor: '#B7B5B8' }} ></View>
+                                <View style={{ height: 7, width: 45, borderLeftWidth: 1 }} ></View>
+                                <View style={{ height: 7, width: 45, borderLeftWidth: 0.5, borderColor: '#B7B5B8' }} ></View>
+                                <View style={{ height: 7, width: 45, borderLeftWidth: 0.5, borderColor: '#B7B5B8' }} ></View>
+                                <View style={{ height: 7, width: 45, borderLeftWidth: 0.5, borderColor: '#B7B5B8' }} ></View>
                             </View>
 
-<View style={{height: 10,backgroundColor: 'transparent'}}></View>
+
                             <View style={{ height: 50/2, backgroundColor: '#EEEAED' }}>
-                            
                                 <FlatList
                                     style={{ height: undefined }}
                                     data={this.props.timerShow}
@@ -168,11 +167,16 @@ class Dashboard extends Component {
                                             <View style={{
                                                 height: 50/2,
                                                 position: 'absolute',
-                                              
+                                                
                                                 left: item.timerShowLeft,
-                                                width: ((this.state.now * 4320 / 86400) - item.timerShowLeft)/3,
+                                                width: item.timerShowWidth,
                                                 backgroundColor: item.timerShowColor,
                                             }}>
+                                           
+                                              
+  
+
+
                                             </View>
 
                                         );
@@ -180,16 +184,18 @@ class Dashboard extends Component {
                                     keyExtractor={(item) => item.timerShowId}
                                 >
                                 </FlatList>
-                                <View style={{ opacity:0.3,height: 50/2, backgroundColor: this.state.currentColor,left: (this.state.now*4320/86400)/3,width: (4320-this.state.now*4320/86400)/3}}></View>
+                                <View style={{ position:'absolute',opacity:0.3,height: 50/2, backgroundColor: '#EEEAED',left: this.state.now*4320/86400,width: 4320-this.state.now*4320/86400}}></View>
+
+                                <View style={{ position:'absolute',opacity:0.3,height: 50/2, backgroundColor: this.state.currentColor,left: this.state.now*4320/86400,width: 4320-this.state.now*4320/86400}}></View>
 
 
                             </View>
                             <View style={{
-                                height: 85,
+                                height: 85/2,
                                 position: 'absolute',
                                 borderLeftWidth: 1,
                                 borderColor: 'black',
-                                left: (this.state.now * 4320 / 86400)/3
+                                left: this.state.now * 4320 / 86400
                             }}>
                             </View>
                         </View>
@@ -247,41 +253,46 @@ class Dashboard extends Component {
                                             <View style={{
                                                 height: 50,
                                                 position: 'absolute',
-                                                flexDirection: 'row',
+                                                
                                                 left: item.timerShowLeft,
-                                                width: (this.state.now * 4320 / 86400) - item.timerShowLeft,
+                                                width: item.timerShowWidth,
                                                 backgroundColor: item.timerShowColor,
                                             }}>
-
-
-                                                <Text style={{ top: 5, height: 25, alignSelf: 'center', fontSize: 12, color: '#FFFFFF' }}>{item.timerShowName}</Text>
+                                          
+                                                <Text style={{ top: 5, height: 25, alignSelf: 'center', fontSize: 12, color: '#FFFFFF' }}>
+                                                {item.timerShowName}
+                                                </Text>
+                                       
+                                  
                                                 {
                                                     (item.timerShowName === '') ? null :
 
                                                         Math.floor((item.totalTimerShow - Math.floor(item.totalTimerShow / 3600) * 3600) / 60) > 9 ?
-                                                            <Text style={{ height: 25, alignSelf: 'center', fontSize: 12, color: '#FFFFFF' }}>
+                                                            (<Text style={{ height: 25, alignSelf: 'center', fontSize: 12, color: '#FFFFFF' }}>
 
                                                                 {Math.floor(item.totalTimerShow / 3600)}:{Math.floor((item.totalTimerShow - Math.floor(item.totalTimerShow / 3600) * 3600) / 60)}
 
-                                                            </Text>
+                                                            </Text>)
                                                             :
-                                                            <Text style={{ height: 25, alignSelf: 'center', fontSize: 12, color: '#FFFFFF' }}>
+                                                            (<Text style={{ height: 25, alignSelf: 'center', fontSize: 12, color: '#FFFFFF' }}>
 
                                                                 {Math.floor(item.totalTimerShow / 3600)}:0{Math.floor((item.totalTimerShow - Math.floor(item.totalTimerShow / 3600) * 3600) / 60)}
 
-                                                            </Text>
+                                                            </Text>)
                                                 }
+   </View>
 
 
-
-                                            </View>
+                                      
 
                                         );
                                     }}
                                     keyExtractor={(item) => item.timerShowId}
                                 >
                                 </FlatList>
-                                <View style={{ opacity:0.3,height: 50, backgroundColor: this.state.currentColor,left: this.state.now*4320/86400,width: 4320-this.state.now*4320/86400}}></View>
+                                <View style={{ position:'absolute',opacity:0.3,height: 50, backgroundColor: '#EEEAED',left: this.state.now*4320/86400,width: 4320-this.state.now*4320/86400}}></View>
+
+                                <View style={{ position:'absolute',opacity:0.3,height: 50, backgroundColor: this.state.currentColor,left: this.state.now*4320/86400,width: 4320-this.state.now*4320/86400}}></View>
 
 
                             </View>

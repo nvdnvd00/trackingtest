@@ -7,7 +7,7 @@ import {
 } from './actionsTypes';
 
 let newTimerId = 4;
-let newTimerShowId=1;
+let newTimerShowId=0;
 
 //action: add new timer
 export const addNewTimer = (inputTimerName, inputTimerDescription, inputTimerColor) => {

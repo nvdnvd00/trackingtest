@@ -4,7 +4,14 @@ import {
 } from '../actions/actionsTypes';
 
 const timerShowDefault = [
-
+{
+    // timerShowId: 0,
+    // timerShowLeft: 2000,
+    // timerShowWidth: 6.5,
+    // timeShowColor: '#83C382',
+    // timerShowName: 'Pine Tree Bank',
+    // totalTimerShow: 7800,
+},
 ]
 const timerShowReducers = (timerShow = timerShowDefault, action) => {
     switch (action.type) {
