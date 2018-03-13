@@ -165,7 +165,7 @@ class Dashboard extends Component {
                                     renderItem={({ item }) => {
                                         return (
                                             <View style={{
-                                                height: 50/2,
+                                                height: 50/2+10,
                                                 position: 'absolute',
                                                 
                                                 left: item.timerShowLeft/3,
@@ -184,9 +184,9 @@ class Dashboard extends Component {
                                     keyExtractor={(item) => item.timerShowId}
                                 >
                                 </FlatList>
-                                <View style={{ position:'absolute',opacity:0.3,height: 50/2, backgroundColor: '#EEEAED',left: this.state.now*4320/86400/3,width: (4320-this.state.now*4320/86400)/3}}></View>
+                                <View style={{ position:'absolute',opacity:0.3,height: 50/2+10, backgroundColor: '#EEEAED',left: this.state.now*4320/86400/3,width: (4320-this.state.now*4320/86400)/3}}></View>
 
-                                <View style={{ position:'absolute',opacity:0.3,height: 50/2, backgroundColor: this.state.currentColor,left: (this.state.now*4320/86400)/3,width: (4320-this.state.now*4320/86400)/3}}></View>
+                                <View style={{ position:'absolute',opacity:0.3,height: 50/2+10, backgroundColor: this.state.currentColor,left: (this.state.now*4320/86400)/3,width: (4320-this.state.now*4320/86400)/3}}></View>
 
 
                             </View>
